@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file-parser-agent"
+version = "1.0.0"
+description = "Document processing tool that extracts structured content from business documents"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "File Parser Agent"}
+]
+keywords = ["pdf", "word", "excel", "powerpoint", "document", "parser", "extractor"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "PyPDF2>=3.0.0",
+    "python-docx>=1.1.0",
+    "openpyxl>=3.1.0",
+    "python-pptx>=0.6.23",
+    "flask>=3.0.0",
+    "Pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+vision = ["anthropic>=0.18.0"]
+mcp = ["mcp>=1.0.0"]
+validation = ["python-magic>=0.4.27"]
+all = [
+    "anthropic>=0.18.0",
+    "mcp>=1.0.0",
+    "python-magic>=0.4.27",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+file-parser-cli = "src.cli.commands:main"
+file-parser-mcp = "src.mcp.server:run_server"
+
+[project.urls]
+Homepage = "https://github.com/file-parser-agent/file-parser-agent"
+Documentation = "https://github.com/file-parser-agent/file-parser-agent#readme"
+Repository = "https://github.com/file-parser-agent/file-parser-agent"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+"src.web" = ["templates/*.html", "static/*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N", "D", "UP"]
+ignore = ["D100", "D104"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=src --cov-report=term-missing"

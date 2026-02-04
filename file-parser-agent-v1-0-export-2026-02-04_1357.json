@@ -1,0 +1,1911 @@
+{
+  "_meta": {
+    "version": "1.1.0",
+    "exportedAt": "2026-02-04T20:57:20.244Z",
+    "projectId": "92f1c561-995f-4342-a1ac-59edde51868a",
+    "canvasId": "d4913369-c6b3-45cf-84be-a4d844f30638",
+    "canvasName": "File Parser Agent V1.0",
+    "canvasDescription": "A document processing tool that extracts structured content from business documents and converts them into machine-readable formats. Upload PDF, Word, Excel, or PowerPoint files and get back clean, structured data in JSON or Markdown format. The agent extracts text, tables, metadata, and can describe images using AI vision.",
+    "canvasTags": [
+      "document-parser",
+      "file-converter",
+      "pdf-parser",
+      "word-parser",
+      "excel-parser",
+      "powerpoint-parser",
+      "docx",
+      "xlsx",
+      "pptx",
+      "json-output",
+      "markdown-output",
+      "text-extraction",
+      "metadata-extraction",
+      "table-extraction",
+      "ai-vision",
+      "claude-api",
+      "claude-vision",
+      "image-analysis",
+      "chart-analysis",
+      "mcp-server",
+      "model-context-protocol",
+      "claude-desktop",
+      "flask",
+      "web-application",
+      "cli-tool",
+      "api-wrapper",
+      "python",
+      "tool-use",
+      "document-processing",
+      "data-extraction",
+      "content-conversion",
+      "office-documents",
+      "business-documents",
+      "structured-data",
+      "automation",
+      "accessibility",
+      "anthropic"
+    ],
+    "description": "Pronghorn.RED Canvas Export - contains architecture diagram nodes, edges, and layers. This file can be imported back to recreate the canvas."
+  },
+  "_documentation": {
+    "overview": "This JSON file represents a visual architecture canvas. An AI or human can interpret this structure to understand or recreate the diagram.",
+    "nodeStructure": {
+      "description": "Each node represents an architectural element on the canvas",
+      "fields": {
+        "id": "Unique UUID identifier for the node",
+        "type": "React Flow node type: 'custom' (standard architecture nodes), 'notes' (sticky notes with markdown), 'zone' (grouping containers), 'label' (text labels)",
+        "position": "X,Y coordinates on the canvas (origin is top-left)",
+        "data.type": "Semantic node type from nodeTypes list (e.g., 'PAGE', 'COMPONENT', 'DATABASE', 'API_SERVICE')",
+        "data.label": "Primary display text / node title",
+        "data.subtitle": "Optional secondary descriptive text",
+        "data.content": "For notes nodes, contains markdown content",
+        "style": "Optional CSS-like styling object (width, height, backgroundColor)"
+      }
+    },
+    "edgeStructure": {
+      "description": "Edges represent connections/relationships between nodes (arrows)",
+      "fields": {
+        "id": "Unique UUID identifier for the edge",
+        "source": "ID of the source node (where arrow starts)",
+        "target": "ID of the target node (where arrow ends)",
+        "label": "Optional connection label (e.g., 'uses', 'calls', 'depends on')",
+        "type": "Edge routing style: 'default' (curved bezier), 'straight', 'step' (right angles), 'smoothstep'",
+        "style": "Optional styling (stroke color, strokeWidth)"
+      }
+    },
+    "layerStructure": {
+      "description": "Layers organize nodes into toggleable visibility groups",
+      "fields": {
+        "id": "Unique UUID identifier for the layer",
+        "name": "Display name for the layer",
+        "node_ids": "Array of node IDs belonging to this layer",
+        "visible": "Whether the layer is currently visible (true/false)"
+      }
+    },
+    "connectionRules": "The connectionRules section defines valid source->target relationships and the left-to-right flow hierarchy for node types"
+  },
+  "nodeTypes": [
+    {
+      "system_name": "NOTES",
+      "display_label": "Notes",
+      "description": "Resizable markdown notes for documentation",
+      "category": "annotation",
+      "color_class": "bg-amber-500/10 border-amber-500/50 text-amber-700 dark:text-amber-400",
+      "order_score": 10
+    },
+    {
+      "system_name": "ZONE",
+      "display_label": "Zone",
+      "description": "Resizable background zone for grouping nodes",
+      "category": "annotation",
+      "color_class": "bg-slate-500/10 border-slate-500/50 text-slate-700 dark:text-slate-400",
+      "order_score": 11
+    },
+    {
+      "system_name": "LABEL",
+      "display_label": "Label",
+      "description": "Simple resizable text label",
+      "category": "annotation",
+      "color_class": "bg-stone-500/10 border-stone-500/50 text-stone-700 dark:text-stone-400",
+      "order_score": 12
+    },
+    {
+      "system_name": "PROJECT",
+      "display_label": "Project",
+      "description": "Root application node",
+      "category": "meta",
+      "color_class": "bg-cyan-500/10 border-cyan-500/50 text-cyan-700 dark:text-cyan-400",
+      "order_score": 100
+    },
+    {
+      "system_name": "REQUIREMENT",
+      "display_label": "Requirement",
+      "description": "Functional requirement",
+      "category": "meta",
+      "color_class": "bg-indigo-500/10 border-indigo-500/50 text-indigo-700 dark:text-indigo-400",
+      "order_score": 100
+    },
+    {
+      "system_name": "SECURITY",
+      "display_label": "Security",
+      "description": "Security control",
+      "category": "infrastructure",
+      "color_class": "bg-yellow-500/10 border-yellow-500/50 text-yellow-700 dark:text-yellow-400",
+      "order_score": 100
+    },
+    {
+      "system_name": "STANDARD",
+      "display_label": "Standard",
+      "description": "Compliance standard",
+      "category": "meta",
+      "color_class": "bg-teal-500/10 border-teal-500/50 text-teal-700 dark:text-teal-400",
+      "order_score": 100
+    },
+    {
+      "system_name": "TECH_STACK",
+      "display_label": "Tech Stack",
+      "description": "Technology choice",
+      "category": "meta",
+      "color_class": "bg-gray-500/10 border-gray-500/50 text-gray-700 dark:text-gray-400",
+      "order_score": 100
+    },
+    {
+      "system_name": "PAGE",
+      "display_label": "Page",
+      "description": "User-facing page/route",
+      "category": "frontend",
+      "color_class": "bg-sky-500/10 border-sky-500/50 text-sky-700 dark:text-sky-400",
+      "order_score": 200
+    },
+    {
+      "system_name": "COMPONENT",
+      "display_label": "Component",
+      "description": "Legacy: UI component",
+      "category": "frontend",
+      "color_class": "bg-blue-500/10 border-blue-500/50 text-blue-700 dark:text-blue-400",
+      "order_score": 300
+    },
+    {
+      "system_name": "WEB_COMPONENT",
+      "display_label": "Web Component",
+      "description": "Frontend UI component",
+      "category": "frontend",
+      "color_class": "bg-blue-500/10 border-blue-500/50 text-blue-700 dark:text-blue-400",
+      "order_score": 300
+    },
+    {
+      "system_name": "BLOCK_FUNCTION",
+      "display_label": "Block / Function",
+      "description": "Reusable code block or utility function",
+      "category": "frontend",
+      "color_class": "bg-indigo-400/10 border-indigo-400/50 text-indigo-600 dark:text-indigo-400",
+      "order_score": 350
+    },
+    {
+      "system_name": "HOOK_COMPOSABLE",
+      "display_label": "Hook/Composable",
+      "description": "Frontend hook or composable",
+      "category": "frontend",
+      "color_class": "bg-violet-500/10 border-violet-500/50 text-violet-700 dark:text-violet-400",
+      "order_score": 400
+    },
+    {
+      "system_name": "AGENT",
+      "display_label": "Agent",
+      "description": "AI Agent component",
+      "category": "agent",
+      "color_class": "bg-cyan-600/10 border-cyan-600/50 text-cyan-800 dark:text-cyan-300",
+      "order_score": 500
+    },
+    {
+      "system_name": "API_SERVICE",
+      "display_label": "API Service",
+      "description": "API service entry point",
+      "category": "backend",
+      "color_class": "bg-green-500/10 border-green-500/50 text-green-700 dark:text-green-400",
+      "order_score": 500
+    },
+    {
+      "system_name": "OTHER",
+      "display_label": "Other",
+      "description": "Generic/miscellaneous node",
+      "category": "general",
+      "color_class": "bg-slate-500/10 border-slate-500/50 text-slate-700 dark:text-slate-400",
+      "order_score": 500
+    },
+    {
+      "system_name": "API",
+      "display_label": "API",
+      "description": "Legacy: API endpoint",
+      "category": "backend",
+      "color_class": "bg-green-500/10 border-green-500/50 text-green-700 dark:text-green-400",
+      "order_score": 600
+    },
+    {
+      "system_name": "API_MIDDLEWARE",
+      "display_label": "API Middleware",
+      "description": "API middleware handler",
+      "category": "backend",
+      "color_class": "bg-amber-500/10 border-amber-500/50 text-amber-700 dark:text-amber-400",
+      "order_score": 600
+    },
+    {
+      "system_name": "API_ROUTER",
+      "display_label": "API Router",
+      "description": "API routing layer",
+      "category": "backend",
+      "color_class": "bg-lime-500/10 border-lime-500/50 text-lime-700 dark:text-lime-400",
+      "order_score": 600
+    },
+    {
+      "system_name": "API_CONTROLLER",
+      "display_label": "API Controller",
+      "description": "API controller logic",
+      "category": "backend",
+      "color_class": "bg-emerald-500/10 border-emerald-500/50 text-emerald-700 dark:text-emerald-400",
+      "order_score": 700
+    },
+    {
+      "system_name": "API_UTIL",
+      "display_label": "API Utility",
+      "description": "API utility functions",
+      "category": "backend",
+      "color_class": "bg-stone-500/10 border-stone-500/50 text-stone-700 dark:text-stone-400",
+      "order_score": 700
+    },
+    {
+      "system_name": "WEBHOOK",
+      "display_label": "Webhook",
+      "description": "Webhook handler",
+      "category": "backend",
+      "color_class": "bg-pink-500/10 border-pink-500/50 text-pink-700 dark:text-pink-400",
+      "order_score": 700
+    },
+    {
+      "system_name": "EXTERNAL_SERVICE",
+      "display_label": "External Service",
+      "description": "Third-party service integration",
+      "category": "infrastructure",
+      "color_class": "bg-orange-500/10 border-orange-500/50 text-orange-700 dark:text-orange-400",
+      "order_score": 800
+    },
+    {
+      "system_name": "FIREWALL",
+      "display_label": "Firewall",
+      "description": "Firewall/security layer",
+      "category": "infrastructure",
+      "color_class": "bg-red-500/10 border-red-500/50 text-red-700 dark:text-red-400",
+      "order_score": 800
+    },
+    {
+      "system_name": "SERVICE",
+      "display_label": "Service",
+      "description": "Legacy: External service",
+      "category": "infrastructure",
+      "color_class": "bg-orange-500/10 border-orange-500/50 text-orange-700 dark:text-orange-400",
+      "order_score": 800
+    },
+    {
+      "system_name": "DATABASE",
+      "display_label": "Database",
+      "description": "Database container",
+      "category": "database",
+      "color_class": "bg-purple-500/10 border-purple-500/50 text-purple-700 dark:text-purple-400",
+      "order_score": 900
+    },
+    {
+      "system_name": "SCHEMA",
+      "display_label": "Schema",
+      "description": "Database schema",
+      "category": "database",
+      "color_class": "bg-fuchsia-500/10 border-fuchsia-500/50 text-fuchsia-700 dark:text-fuchsia-400",
+      "order_score": 950
+    },
+    {
+      "system_name": "TABLE",
+      "display_label": "Table",
+      "description": "Database table",
+      "category": "database",
+      "color_class": "bg-rose-500/10 border-rose-500/50 text-rose-700 dark:text-rose-400",
+      "order_score": 1000
+    }
+  ],
+  "connectionRules": {
+    "description": "Valid connections follow a left-to-right flow hierarchy. Lower levels appear on the left, higher levels on the right.",
+    "flowHierarchy": [
+      {
+        "level": 1,
+        "types": [
+          "PROJECT",
+          "REQUIREMENT",
+          "STANDARD",
+          "TECH_STACK",
+          "SECURITY"
+        ]
+      },
+      {
+        "level": 2,
+        "types": [
+          "PAGE"
+        ]
+      },
+      {
+        "level": 3,
+        "types": [
+          "WEB_COMPONENT",
+          "COMPONENT"
+        ]
+      },
+      {
+        "level": 3.5,
+        "types": [
+          "BLOCK_FUNCTION"
+        ]
+      },
+      {
+        "level": 4,
+        "types": [
+          "HOOK_COMPOSABLE"
+        ]
+      },
+      {
+        "level": 5,
+        "types": [
+          "API_SERVICE",
+          "AGENT",
+          "OTHER"
+        ]
+      },
+      {
+        "level": 6,
+        "types": [
+          "API_ROUTER",
+          "API_MIDDLEWARE",
+          "API"
+        ]
+      },
+      {
+        "level": 7,
+        "types": [
+          "API_CONTROLLER",
+          "API_UTIL",
+          "WEBHOOK"
+        ]
+      },
+      {
+        "level": 8,
+        "types": [
+          "EXTERNAL_SERVICE",
+          "SERVICE",
+          "FIREWALL"
+        ]
+      },
+      {
+        "level": 9,
+        "types": [
+          "DATABASE"
+        ]
+      },
+      {
+        "level": 10,
+        "types": [
+          "SCHEMA"
+        ]
+      },
+      {
+        "level": 11,
+        "types": [
+          "TABLE"
+        ]
+      }
+    ],
+    "validConnections": [
+      {
+        "source": "PROJECT",
+        "targets": [
+          "PAGE",
+          "TECH_STACK",
+          "REQUIREMENT",
+          "STANDARD",
+          "SECURITY"
+        ],
+        "label": "contains"
+      },
+      {
+        "source": "REQUIREMENT",
+        "targets": [
+          "PAGE",
+          "WEB_COMPONENT",
+          "BLOCK_FUNCTION",
+          "API_SERVICE",
+          "DATABASE"
+        ],
+        "label": "drives"
+      },
+      {
+        "source": "STANDARD",
+        "targets": [
+          "WEB_COMPONENT",
+          "BLOCK_FUNCTION",
+          "API_SERVICE",
+          "DATABASE",
+          "SECURITY"
+        ],
+        "label": "governs"
+      },
+      {
+        "source": "SECURITY",
+        "targets": [
+          "API_MIDDLEWARE",
+          "FIREWALL",
+          "DATABASE"
+        ],
+        "label": "protects"
+      },
+      {
+        "source": "PAGE",
+        "targets": [
+          "WEB_COMPONENT",
+          "COMPONENT",
+          "BLOCK_FUNCTION",
+          "HOOK_COMPOSABLE"
+        ],
+        "label": "renders"
+      },
+      {
+        "source": "WEB_COMPONENT",
+        "targets": [
+          "WEB_COMPONENT",
+          "BLOCK_FUNCTION",
+          "HOOK_COMPOSABLE"
+        ],
+        "label": "uses"
+      },
+      {
+        "source": "COMPONENT",
+        "targets": [
+          "COMPONENT",
+          "BLOCK_FUNCTION",
+          "HOOK_COMPOSABLE",
+          "API"
+        ],
+        "label": "uses"
+      },
+      {
+        "source": "BLOCK_FUNCTION",
+        "targets": [
+          "BLOCK_FUNCTION",
+          "HOOK_COMPOSABLE",
+          "API_SERVICE"
+        ],
+        "label": "calls"
+      },
+      {
+        "source": "HOOK_COMPOSABLE",
+        "targets": [
+          "API_SERVICE",
+          "EXTERNAL_SERVICE",
+          "AGENT"
+        ],
+        "label": "calls"
+      },
+      {
+        "source": "API_SERVICE",
+        "targets": [
+          "API_ROUTER"
+        ],
+        "label": "routes to"
+      },
+      {
+        "source": "API_ROUTER",
+        "targets": [
+          "API_MIDDLEWARE",
+          "API_CONTROLLER"
+        ],
+        "label": "delegates to"
+      },
+      {
+        "source": "API_MIDDLEWARE",
+        "targets": [
+          "API_CONTROLLER"
+        ],
+        "label": "passes to"
+      },
+      {
+        "source": "API_CONTROLLER",
+        "targets": [
+          "API_UTIL",
+          "EXTERNAL_SERVICE",
+          "DATABASE",
+          "AGENT"
+        ],
+        "label": "uses"
+      },
+      {
+        "source": "API",
+        "targets": [
+          "SERVICE",
+          "DATABASE"
+        ],
+        "label": "uses"
+      },
+      {
+        "source": "API_UTIL",
+        "targets": [
+          "EXTERNAL_SERVICE",
+          "DATABASE"
+        ],
+        "label": "accesses"
+      },
+      {
+        "source": "WEBHOOK",
+        "targets": [
+          "API_CONTROLLER",
+          "EXTERNAL_SERVICE",
+          "AGENT"
+        ],
+        "label": "triggers"
+      },
+      {
+        "source": "EXTERNAL_SERVICE",
+        "targets": [
+          "DATABASE"
+        ],
+        "label": "persists to"
+      },
+      {
+        "source": "SERVICE",
+        "targets": [
+          "DATABASE"
+        ],
+        "label": "persists to"
+      },
+      {
+        "source": "DATABASE",
+        "targets": [
+          "SCHEMA"
+        ],
+        "label": "contains"
+      },
+      {
+        "source": "SCHEMA",
+        "targets": [
+          "TABLE"
+        ],
+        "label": "defines"
+      },
+      {
+        "source": "AGENT",
+        "targets": [
+          "API_SERVICE",
+          "EXTERNAL_SERVICE",
+          "WEB_COMPONENT",
+          "BLOCK_FUNCTION",
+          "DATABASE"
+        ],
+        "label": "interacts with"
+      },
+      {
+        "source": "OTHER",
+        "targets": [
+          "API_SERVICE",
+          "DATABASE",
+          "EXTERNAL_SERVICE"
+        ],
+        "label": "connects to"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "8a1b33b5-66b3-4259-a2f7-cd86d8588880",
+      "type": "custom",
+      "position": {
+        "x": 1638.931305460781,
+        "y": 302.86254263847076
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "chat CLI Command",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "file-parser-cli interactive",
+        "description": "Provides an interactive chat interface, potentially using the API wrapper's conversational capabilities."
+      }
+    },
+    {
+      "id": "73cea592-ae7d-41a7-8e81-e6a0f052ce12",
+      "type": "custom",
+      "position": {
+        "x": 4298.118750630643,
+        "y": 46.9007599878484
+      },
+      "data": {
+        "type": "SCHEMA",
+        "label": "outputs/",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Persistent Outputs",
+        "description": "Directory for storing the final parsed JSON, Markdown, CSV, or TXT outputs."
+      }
+    },
+    {
+      "id": "7bd646e8-4e4b-428d-a8aa-f02fcbdc948d",
+      "type": "custom",
+      "position": {
+        "x": 3492.4801166598763,
+        "y": 706.4118800147971
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "PDFParser",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "PyPDF2",
+        "description": "Extracts text, page structure, and metadata from PDF files."
+      }
+    },
+    {
+      "id": "69b22b1a-c7ed-44e2-b612-98e2c6d40318",
+      "type": "custom",
+      "position": {
+        "x": 490.0066523566636,
+        "y": 317.24276421575814
+      },
+      "data": {
+        "type": "REQUIREMENT",
+        "label": "AI Vision Integration",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Image/Chart Analysis",
+        "description": "The system must integrate with an AI vision service for describing images and charts."
+      }
+    },
+    {
+      "id": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "type": "custom",
+      "position": {
+        "x": 100,
+        "y": 50
+      },
+      "data": {
+        "type": "PROJECT",
+        "label": "File Parser Agent",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Document Processing Tool",
+        "description": "Extracts structured content from business documents (PDF, Word, Excel, PowerPoint) and converts them into machine-readable formats (JSON, Markdown)."
+      }
+    },
+    {
+      "id": "5e54cbd0-6e9b-4789-87a5-cc1a94084b55",
+      "type": "custom",
+      "position": {
+        "x": 489.3671150462269,
+        "y": -287.2173229754944
+      },
+      "data": {
+        "type": "PAGE",
+        "label": "Flask Web UI",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "/",
+        "description": "User-facing web interface for file uploads, result display, and downloads. Built with Flask and Jinja2."
+      }
+    },
+    {
+      "id": "a259fe39-75fb-46b8-9652-8d356bf19014",
+      "type": "custom",
+      "position": {
+        "x": 3492.4801166598763,
+        "y": 837.8301146635306
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "WordParser",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "python-docx",
+        "description": "Extracts paragraphs, tables, styles, and metadata from Word documents."
+      }
+    },
+    {
+      "id": "b6165aff-4cf3-40c0-a2e6-257178c79b76",
+      "type": "custom",
+      "position": {
+        "x": 3969.7342344081458,
+        "y": 644.8625460993862
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "Vision Service",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "AI Image Analysis",
+        "description": "Communicates with Anthropic Claude API for AI-powered image and chart analysis."
+      }
+    },
+    {
+      "id": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "type": "custom",
+      "position": {
+        "x": 1634.931305460781,
+        "y": -200.5038857574338
+      },
+      "data": {
+        "type": "API_CONTROLLER",
+        "label": "File Upload Controller",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "POST /upload",
+        "description": "Handles incoming file uploads, validates them, and initiates parsing."
+      }
+    },
+    {
+      "id": "c6226ead-15d4-4b28-96f3-a7b6719eff2c",
+      "type": "custom",
+      "position": {
+        "x": 1634.931305460781,
+        "y": 51.43028056374595
+      },
+      "data": {
+        "type": "API_CONTROLLER",
+        "label": "MCP Tool Handler",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Tool Execution Logic",
+        "description": "Interprets MCP tool calls and dispatches to the appropriate parsing/vision services."
+      }
+    },
+    {
+      "id": "ec648b4e-edd4-44de-9780-7b55d56293ad",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 640.9446976869596
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "mcp library",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "MCP Protocol",
+        "description": "Library for implementing the Model Context Protocol for Claude Desktop."
+      }
+    },
+    {
+      "id": "54cc944c-ed14-44c2-b741-88e195542f1a",
+      "type": "custom",
+      "position": {
+        "x": 4298.118750630643,
+        "y": -285.08883437620153
+      },
+      "data": {
+        "type": "SCHEMA",
+        "label": "uploads/",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Temporary Uploads",
+        "description": "Directory for temporary storage of uploaded files before processing."
+      }
+    },
+    {
+      "id": "43ee1fbe-9fa2-488a-9712-d4ea4465ab44",
+      "type": "custom",
+      "position": {
+        "x": 4313.091387071188,
+        "y": 558.6919570697826
+      },
+      "data": {
+        "type": "EXTERNAL_SERVICE",
+        "label": "Anthropic Claude API",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "AI Vision",
+        "description": "External AI service for image analysis, chart description, and other vision tasks."
+      }
+    },
+    {
+      "id": "cc1f4f58-148b-4f95-99d1-28788c957845",
+      "type": "custom",
+      "position": {
+        "x": 1277.894592377775,
+        "y": 384.7054010038119
+      },
+      "data": {
+        "type": "OTHER",
+        "label": "CLI Application",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "file-parser-cli",
+        "description": "Command-line interface for script automation and interactive use. Uses Python's argparse."
+      }
+    },
+    {
+      "id": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "type": "custom",
+      "position": {
+        "x": 2839.340693294689,
+        "y": 513.2752977982421
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "Parsing Engine",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "BaseDocumentParser",
+        "description": "Abstract base class for document-specific parsing logic. Selects appropriate parser based on file extension."
+      }
+    },
+    {
+      "id": "bb6353e1-c598-4570-a620-7e4a4366511c",
+      "type": "custom",
+      "position": {
+        "x": 1638.931305460781,
+        "y": 477.3672837889639
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "document_parser CLI Command",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "file-parser-cli parse",
+        "description": "Directly invokes the Python API Wrapper for file parsing via CLI."
+      }
+    },
+    {
+      "id": "36a352aa-e827-49ce-bef7-c28991393ffb",
+      "type": "custom",
+      "position": {
+        "x": 896.7444273049239,
+        "y": -378.31087714169314
+      },
+      "data": {
+        "type": "WEB_COMPONENT",
+        "label": "Upload Form",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "multipart/form-data",
+        "description": "Handles file selection and submission to the backend."
+      }
+    },
+    {
+      "id": "eb95bb4d-ed44-4134-b6d5-0fe6ba160d66",
+      "type": "custom",
+      "position": {
+        "x": 1269.299798957787,
+        "y": 50.42714592357203
+      },
+      "data": {
+        "type": "API_SERVICE",
+        "label": "MCP Server",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Model Context Protocol",
+        "description": "Server for Claude Desktop integration, exposing parsing functionality as tools."
+      }
+    },
+    {
+      "id": "8f27cc5e-3104-4a89-b040-7d48c137176c",
+      "type": "custom",
+      "position": {
+        "x": 896.7444273049239,
+        "y": -191.58591067275054
+      },
+      "data": {
+        "type": "WEB_COMPONENT",
+        "label": "Result Display",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "JSON/Markdown Viewer",
+        "description": "Displays parsed content and provides download links."
+      }
+    },
+    {
+      "id": "747b0b2e-f5e2-43d7-bea6-a1cb4cdf4d44",
+      "type": "custom",
+      "position": {
+        "x": 4298.118750630643,
+        "y": -119.09403719417655
+      },
+      "data": {
+        "type": "SCHEMA",
+        "label": "logs/",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Application Logs",
+        "description": "Directory for storing application logs (e.g., parser.log)."
+      }
+    },
+    {
+      "id": "a8c47946-d719-4d35-9c95-0868f5596cfd",
+      "type": "custom",
+      "position": {
+        "x": 490.0066523566636,
+        "y": 401.24276421575814
+      },
+      "data": {
+        "type": "REQUIREMENT",
+        "label": "Output Formats",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "JSON, Markdown, CSV, TXT",
+        "description": "Parsed content must be convertible to these output formats."
+      }
+    },
+    {
+      "id": "297826d0-cf23-49f8-beee-6e83f753863d",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 724.9446976869596
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "Flask",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Web Framework",
+        "description": "Lightweight Python web framework for the UI and API."
+      }
+    },
+    {
+      "id": "05297a95-e652-40c9-90e1-083025c86fef",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 808.9446976869596
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "openpyxl",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Excel Parsing",
+        "description": "Python library for reading and writing Excel 2010 xlsx/xlsm/xltx/xltm files."
+      }
+    },
+    {
+      "id": "b46a7145-8486-443d-bc7a-2562a021abf8",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 892.9446976869596
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "Modular Monolith",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Architecture Style",
+        "description": "Single deployable unit with well-defined internal boundaries for maintainability."
+      }
+    },
+    {
+      "id": "1a04217b-4b9c-4b98-aa32-7a64ee380fb3",
+      "type": "custom",
+      "position": {
+        "x": 3963.4771457794404,
+        "y": -120.25932517275503
+      },
+      "data": {
+        "type": "DATABASE",
+        "label": "File System",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Local Storage",
+        "description": "Stores temporary uploads, processed outputs, and application logs."
+      }
+    },
+    {
+      "id": "9d21ccb2-b5d1-4ead-b57a-6531c1f98ef4",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 976.9446976869596
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "python-pptx",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "PowerPoint Parsing",
+        "description": "Python library for creating and updating PowerPoint (.pptx) files."
+      }
+    },
+    {
+      "id": "59606636-2703-4aa9-8b08-ab8376f80752",
+      "type": "custom",
+      "position": {
+        "x": 3493.9262117248677,
+        "y": 1115.0048691559705
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "File Validation",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Size, Extension, Content",
+        "description": "Ensures uploaded files meet specified criteria (e.g., max size 50MB, supported format)."
+      }
+    },
+    {
+      "id": "925f792a-bfed-4296-ba84-7a430748ed9b",
+      "type": "custom",
+      "position": {
+        "x": 3492.4801166598763,
+        "y": 969.248349312264
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "ExcelParser",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "openpyxl",
+        "description": "Extracts cell data, sheets, and metadata from Excel spreadsheets."
+      }
+    },
+    {
+      "id": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "type": "custom",
+      "position": {
+        "x": 2839.340693294689,
+        "y": 195.8321771156061
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "Output Manager",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "File Persistence & Formatting",
+        "description": "Handles format conversion (JSON, Markdown, CSV, TXT) and persistence of parsed output to local filesystem."
+      }
+    },
+    {
+      "id": "870210fe-113e-4dd7-a71e-4f4efe4bfb8b",
+      "type": "custom",
+      "position": {
+        "x": 1634.931305460781,
+        "y": -377.24190882269914
+      },
+      "data": {
+        "type": "API_CONTROLLER",
+        "label": "Output Management Controller",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "/download, /list, /delete, /clear",
+        "description": "Manages operations related to saved parsed outputs."
+      }
+    },
+    {
+      "id": "4f755b1b-08be-43fa-9571-5d14d9bcb969",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 1060.9446976869594
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "PyPDF2",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "PDF Parsing",
+        "description": "Python library for working with PDF documents."
+      }
+    },
+    {
+      "id": "3c84e83b-fdb3-4341-8b66-8e16afd56356",
+      "type": "custom",
+      "position": {
+        "x": 1269.299798957787,
+        "y": -287.77361855889626
+      },
+      "data": {
+        "type": "API_ROUTER",
+        "label": "Flask API Endpoints",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "HTTP Routes",
+        "description": "Defines routes for file upload, download, listing, and deletion of outputs."
+      }
+    },
+    {
+      "id": "dc37ca55-b5e1-4ca5-9ac7-54f6ebd485c4",
+      "type": "custom",
+      "position": {
+        "x": 487.36763653511775,
+        "y": 1144.9446976869594
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "Anthropic SDK",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "AI API Client",
+        "description": "Python SDK for interacting with Anthropic's Claude API."
+      }
+    },
+    {
+      "id": "79304cbf-cc6a-47ed-865e-dd6e9eb5b43d",
+      "type": "custom",
+      "position": {
+        "x": 4313.091387071188,
+        "y": 729.8555656764248
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "Image Compression Logic",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "Pillow JPEG",
+        "description": "Compresses images to meet API size limits (e.g., 5MB for Claude Vision API) before sending."
+      }
+    },
+    {
+      "id": "6f34cb10-1a55-4e1d-b58d-f15e6bd18a72",
+      "type": "custom",
+      "position": {
+        "x": 486.0481286243448,
+        "y": 1228.9446976869594
+      },
+      "data": {
+        "type": "TECH_STACK",
+        "label": "python-docx",
+        "style": {
+          "width": 180,
+          "height": 66
+        },
+        "nodeType": "custom",
+        "subtitle": "Word Parsing",
+        "description": "Python library for creating and modifying Word documents."
+      },
+      "style": {
+        "width": 180,
+        "height": 66
+      }
+    },
+    {
+      "id": "826222f9-aeee-4a71-b31e-215f21125e8c",
+      "type": "custom",
+      "position": {
+        "x": 490.0066523566636,
+        "y": 233.24276421575814
+      },
+      "data": {
+        "type": "REQUIREMENT",
+        "label": "Supported Formats",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "PDF, DOCX, XLSX, PPTX",
+        "description": "The system must support parsing these document types."
+      }
+    },
+    {
+      "id": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "type": "custom",
+      "position": {
+        "x": 2021.1300433088845,
+        "y": 192.71547465318156
+      },
+      "data": {
+        "type": "API_SERVICE",
+        "label": "Python API Wrapper",
+        "style": {},
+        "nodeType": "custom",
+        "subtitle": "FileParserAgent Class",
+        "description": "Unified Python API for all parsing operations and tool execution."
+      }
+    },
+    {
+      "id": "6636a0d1-465f-42d8-91a3-8b703c66255e",
+      "type": "custom",
+      "position": {
+        "x": 3492.4801166598763,
+        "y": 515.539231987898
+      },
+      "data": {
+        "type": "BLOCK_FUNCTION",
+        "label": "PowerPointParser",
+        "style": {
+          "width": 180,
+          "height": 66
+        },
+        "nodeType": "custom",
+        "subtitle": "python-pptx",
+        "description": "Extracts slides, text, titles, notes, shapes, images, and charts from PowerPoint presentations."
+      },
+      "style": {
+        "width": 180,
+        "height": 66
+      }
+    },
+    {
+      "id": "f244a948-56a3-4559-bd1b-b549f549d4e7",
+      "type": "zone",
+      "position": {
+        "x": 464.0957512362919,
+        "y": 566.2732182472237
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "Tech Stack",
+        "style": {
+          "width": 227,
+          "height": 759
+        },
+        "nodeType": "zone",
+        "subtitle": "package requirements",
+        "description": "packages and frameworks required to build the app"
+      },
+      "style": {
+        "width": 227,
+        "height": 759
+      }
+    },
+    {
+      "id": "6609733e-5d83-4eda-82fd-574d6ca56a46",
+      "type": "zone",
+      "position": {
+        "x": 464.0957512362919,
+        "y": 173.0598608369017
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "Requirements",
+        "style": {
+          "width": 245,
+          "height": 323
+        },
+        "title": "Requirements",
+        "nodeType": "zone",
+        "subtitle": "technical specifications",
+        "description": "requirements the application needs to meet to be deployable",
+        "backgroundColor": "blue"
+      },
+      "style": {
+        "width": 245,
+        "height": 323
+      }
+    },
+    {
+      "id": "412fde26-79c5-460d-ab78-e76d313a574f",
+      "type": "zone",
+      "position": {
+        "x": 2812.8523682794503,
+        "y": 431.09305541179424
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "File Parsers",
+        "style": {
+          "width": 886,
+          "height": 638
+        },
+        "title": "File Parsers",
+        "nodeType": "zone",
+        "subtitle": "main function",
+        "description": "modules that parse specific file formats to JSON or MD",
+        "backgroundColor": "blue"
+      },
+      "style": {
+        "width": 886,
+        "height": 638
+      }
+    },
+    {
+      "id": "55a6ca6d-7ff2-49c2-8e05-73a547149754",
+      "type": "zone",
+      "position": {
+        "x": 3949.9273640546126,
+        "y": 482.8527688648138
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "Image Analyzer",
+        "style": {
+          "width": 607,
+          "height": 343
+        },
+        "title": "Image Analyzer",
+        "nodeType": "zone",
+        "subtitle": "image description writer",
+        "description": "AI engine that describes images embedded in files and adds descriptions to the output files",
+        "backgroundColor": "orange"
+      },
+      "style": {
+        "width": 607,
+        "height": 343
+      }
+    },
+    {
+      "id": "50cb8451-211a-4fa5-b635-c113a60efdd0",
+      "type": "zone",
+      "position": {
+        "x": 3932.856531019105,
+        "y": -365.7833998668413
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "Files",
+        "style": {
+          "width": 570,
+          "height": 511
+        },
+        "title": "Files",
+        "nodeType": "zone",
+        "subtitle": "file operations",
+        "description": "operations that read and write files",
+        "backgroundColor": "purple"
+      },
+      "style": {
+        "width": 570,
+        "height": 511
+      }
+    },
+    {
+      "id": "490f0f17-1c5e-4824-856a-6a923b58bd8d",
+      "type": "zone",
+      "position": {
+        "x": 1244.8141526354073,
+        "y": 269.84612671656026
+      },
+      "data": {
+        "type": "ZONE",
+        "label": "CLI",
+        "style": {
+          "width": 683,
+          "height": 308
+        },
+        "nodeType": "zone",
+        "subtitle": "cli interface",
+        "description": "cli commands"
+      },
+      "style": {
+        "width": 683,
+        "height": 308
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e769f2d8-d7e0-486f-b8db-0203bcc54a1e",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "5e54cbd0-6e9b-4789-87a5-cc1a94084b55",
+      "label": "exposes",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "5f9db530-9d70-4212-8600-3f146ba10b40",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "eb95bb4d-ed44-4134-b6d5-0fe6ba160d66",
+      "label": "integrates with",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "02ad398d-b6bc-41e2-9add-67859c9a48cd",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "69b22b1a-c7ed-44e2-b612-98e2c6d40318",
+      "label": "addresses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "39a7e0c5-a100-48bd-a743-b7db3ff1e2ce",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "dc37ca55-b5e1-4ca5-9ac7-54f6ebd485c4",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "3970c6ff-1fc4-4da9-b552-31a531462202",
+      "source": "bb6353e1-c598-4570-a620-7e4a4366511c",
+      "target": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "label": "calls",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "71940d36-3ca5-4f52-97a8-783695d976ba",
+      "source": "eb95bb4d-ed44-4134-b6d5-0fe6ba160d66",
+      "target": "c6226ead-15d4-4b28-96f3-a7b6719eff2c",
+      "label": "routes to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "61dff556-e786-420b-b70c-bd0c84338d34",
+      "source": "b6165aff-4cf3-40c0-a2e6-257178c79b76",
+      "target": "43ee1fbe-9fa2-488a-9712-d4ea4465ab44",
+      "label": "calls",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "4e222731-84b4-4987-9345-c0d45952f7d3",
+      "source": "3c84e83b-fdb3-4341-8b66-8e16afd56356",
+      "target": "870210fe-113e-4dd7-a71e-4f4efe4bfb8b",
+      "label": "routes to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "78182e34-2f1a-4e3b-820f-dd508aa3dee0",
+      "source": "870210fe-113e-4dd7-a71e-4f4efe4bfb8b",
+      "target": "73cea592-ae7d-41a7-8e81-e6a0f052ce12",
+      "label": "reads from",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "97be138f-a186-42bb-95fd-7a064ab2c61b",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "cc1f4f58-148b-4f95-99d1-28788c957845",
+      "label": "provides",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "5e19139b-abf3-4195-966d-7804ef0d37c4",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "826222f9-aeee-4a71-b31e-215f21125e8c",
+      "label": "addresses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "f3d5b151-8da2-46c1-94e5-f909aa4143b0",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "b46a7145-8486-443d-bc7a-2562a021abf8",
+      "label": "adopts",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "9a180e47-9b8a-43d6-a698-3a3d07acd235",
+      "source": "5e54cbd0-6e9b-4789-87a5-cc1a94084b55",
+      "target": "36a352aa-e827-49ce-bef7-c28991393ffb",
+      "label": "contains",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "72b6c729-1967-4ee3-bc0b-9597a3cf6210",
+      "source": "36a352aa-e827-49ce-bef7-c28991393ffb",
+      "target": "3c84e83b-fdb3-4341-8b66-8e16afd56356",
+      "label": "posts to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "053d2841-784a-4cb5-8b47-377590393347",
+      "source": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "target": "a259fe39-75fb-46b8-9652-8d356bf19014",
+      "label": "uses strategy",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "b520d38b-b181-4e5f-ab1c-40cec8e65571",
+      "source": "b6165aff-4cf3-40c0-a2e6-257178c79b76",
+      "target": "79304cbf-cc6a-47ed-865e-dd6e9eb5b43d",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "a3097ca1-ec9c-4e0a-9cbd-b3397686abcb",
+      "source": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "target": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "label": "invokes",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "08316eaa-adcb-423d-a1a2-8d4ca807d4f7",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "label": "exposes",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "92596c13-30f7-4484-bf34-9cb1abcf46b9",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "a8c47946-d719-4d35-9c95-0868f5596cfd",
+      "label": "addresses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "b5571bcb-c315-4d46-9047-532fa85b87f2",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "297826d0-cf23-49f8-beee-6e83f753863d",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "3469f6fc-d4b8-46d8-a91e-631b668c0598",
+      "source": "8f27cc5e-3104-4a89-b040-7d48c137176c",
+      "target": "3c84e83b-fdb3-4341-8b66-8e16afd56356",
+      "label": "fetches from",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "91830922-70b7-4e2d-a531-6c02b99a8a37",
+      "source": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "target": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "label": "orchestrates",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "4061ac71-d2fa-4739-a7a8-9d0f90574420",
+      "source": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "target": "925f792a-bfed-4296-ba84-7a430748ed9b",
+      "label": "uses strategy",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "0d9d7de8-824f-4a97-94f6-bf649bfac2cd",
+      "source": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "target": "6636a0d1-465f-42d8-91a3-8b703c66255e",
+      "label": "uses strategy",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "076504fe-07cf-4b8a-8a5b-a5addba6df07",
+      "source": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "target": "1a04217b-4b9c-4b98-aa32-7a64ee380fb3",
+      "label": "writes to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "351ff263-33d8-46de-aa35-ae7cdc69188a",
+      "source": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "target": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "label": "invokes",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "d3fbf042-519e-4bbc-b11e-cb0dd1e6b038",
+      "source": "1a04217b-4b9c-4b98-aa32-7a64ee380fb3",
+      "target": "54cc944c-ed14-44c2-b741-88e195542f1a",
+      "label": "contains",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "a837e084-7101-4157-bb42-9fd3ef89b58c",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "4f755b1b-08be-43fa-9571-5d14d9bcb969",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "6650724a-48b2-4e9f-aa49-fbad741bcf86",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "9d21ccb2-b5d1-4ead-b57a-6531c1f98ef4",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "34835799-b93a-40ae-9755-ab8c146bae55",
+      "source": "cc1f4f58-148b-4f95-99d1-28788c957845",
+      "target": "bb6353e1-c598-4570-a620-7e4a4366511c",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "4bfc5ee7-a6ca-4d98-a661-aa9198529ffb",
+      "source": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "target": "b6165aff-4cf3-40c0-a2e6-257178c79b76",
+      "label": "orchestrates",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "4a602209-588a-4347-81a3-13682dd8c5b5",
+      "source": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "target": "59606636-2703-4aa9-8b08-ab8376f80752",
+      "label": "depends on",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "06d30f8e-a24f-4245-9636-f11597880e4f",
+      "source": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "target": "73cea592-ae7d-41a7-8e81-e6a0f052ce12",
+      "label": "writes to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "c17bffbd-9e84-4717-a179-71bba6a8dd92",
+      "source": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "target": "54cc944c-ed14-44c2-b741-88e195542f1a",
+      "label": "writes temp to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "a661777d-a0d4-4f10-9f43-58a02446a98f",
+      "source": "1a04217b-4b9c-4b98-aa32-7a64ee380fb3",
+      "target": "73cea592-ae7d-41a7-8e81-e6a0f052ce12",
+      "label": "contains",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "bfed9598-6472-42aa-9be1-3de13fd233b0",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "6f34cb10-1a55-4e1d-b58d-f15e6bd18a72",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "6cf71a97-22ea-4352-ba7c-a3fbf21587a6",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "ec648b4e-edd4-44de-9780-7b55d56293ad",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "2875403f-ecc5-4503-8813-6079ac8b59d2",
+      "source": "5e54cbd0-6e9b-4789-87a5-cc1a94084b55",
+      "target": "8f27cc5e-3104-4a89-b040-7d48c137176c",
+      "label": "contains",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "87408774-092a-4fd6-8009-f77604ea0753",
+      "source": "8a1b33b5-66b3-4259-a2f7-cd86d8588880",
+      "target": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "label": "calls",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "cd6302fc-b54d-4f04-92a9-64cf98e2700b",
+      "source": "cb0e3be1-d0b1-41ea-973f-eb55d470311e",
+      "target": "7bd646e8-4e4b-428d-a8aa-f02fcbdc948d",
+      "label": "uses strategy",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "13c99f6a-0068-4837-a20f-0bddfdd69310",
+      "source": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "target": "59606636-2703-4aa9-8b08-ab8376f80752",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "1a5a1a22-c858-4e38-a213-db977f498354",
+      "source": "c6226ead-15d4-4b28-96f3-a7b6719eff2c",
+      "target": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "label": "calls",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "bf395caa-8f85-4b89-ba2c-bda48cf3d7ad",
+      "source": "d6d8a329-57fe-4b4d-8807-2e8e9e0a1e2d",
+      "target": "05297a95-e652-40c9-90e1-083025c86fef",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "3247797b-0331-40a9-9f26-3d2778dd27c0",
+      "source": "cc1f4f58-148b-4f95-99d1-28788c957845",
+      "target": "8a1b33b5-66b3-4259-a2f7-cd86d8588880",
+      "label": "uses",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "4a13d3d9-42e3-42c5-9f2e-738f588fe093",
+      "source": "5742eac4-2ad2-4ad5-950b-70e98a857096",
+      "target": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "label": "orchestrates",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "d80f462d-58b6-4a0f-836d-4d8fec99936a",
+      "source": "6636a0d1-465f-42d8-91a3-8b703c66255e",
+      "target": "b6165aff-4cf3-40c0-a2e6-257178c79b76",
+      "label": "sends images to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "25abc290-4ece-4f7b-9fb9-9b8415e66121",
+      "source": "3c84e83b-fdb3-4341-8b66-8e16afd56356",
+      "target": "eaae7709-e08b-4ade-a786-af0c781395de",
+      "label": "routes to",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "b8b126a9-cdeb-49b9-bb77-81562cfb08a3",
+      "source": "870210fe-113e-4dd7-a71e-4f4efe4bfb8b",
+      "target": "4f5db160-d090-4dfb-8ff4-73e08e4d6f01",
+      "label": "invokes",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "f4f7ac76-64fe-4fbf-b9de-157cbe9292ad",
+      "source": "1a04217b-4b9c-4b98-aa32-7a64ee380fb3",
+      "target": "747b0b2e-f5e2-43d7-bea6-a1cb4cdf4d44",
+      "label": "contains",
+      "type": "default",
+      "style": {
+        "stroke": "hsl(var(--primary))",
+        "strokeWidth": 2
+      }
+    }
+  ],
+  "layers": []
+}

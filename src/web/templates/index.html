@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload - File Parser Agent{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="margin-bottom: 1rem;">Upload Document</h2>
+    
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <label for="file">Select File</label>
+        <input type="file" name="file" id="file" required
+               accept="{{ supported_extensions | join(',') }}">
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: -0.5rem; margin-bottom: 1rem;">
+            Supported: {{ supported_extensions | join(', ') }} &middot; Max size: {{ max_size_mb | int }}MB
+        </p>
+        
+        <label for="format">Output Format</label>
+        <select name="format" id="format">
+            {% for fmt in output_formats %}
+            <option value="{{ fmt }}">{{ fmt | upper }}</option>
+            {% endfor %}
+        </select>
+        
+        <div class="checkbox-group">
+            <input type="checkbox" name="analyze_images" id="analyze_images" checked>
+            <label for="analyze_images" style="margin-bottom: 0;">Analyze images with AI vision</label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Parse Document</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 1rem;">Features</h3>
+    <ul style="padding-left: 1.5rem;">
+        <li><strong>Text Extraction</strong> - Pull all text while preserving structure</li>
+        <li><strong>Table Detection</strong> - Extract tables with row/column data intact</li>
+        <li><strong>Metadata Capture</strong> - Get document properties (author, title, dates)</li>
+        <li><strong>Image Analysis</strong> - AI-powered descriptions of images and charts</li>
+        <li><strong>Multiple Outputs</strong> - JSON, Markdown, CSV, or plain text</li>
+    </ul>
+</div>
+{% endblock %}

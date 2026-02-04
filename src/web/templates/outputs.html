@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Outputs - File Parser Agent{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>Saved Outputs</h2>
+        {% if files %}
+        <form action="{{ url_for('clear') }}" method="post" style="display: inline;"
+              onsubmit="return confirm('Delete all output files?');">
+            <button type="submit" class="btn btn-danger">Clear All</button>
+        </form>
+        {% endif %}
+    </div>
+    
+    {% if files %}
+    <ul class="file-list">
+        {% for file in files %}
+        <li>
+            <div class="file-info">
+                <div class="file-name">{{ file.filename }}</div>
+                <div class="file-meta">
+                    {{ file.format | upper }} &middot; 
+                    {{ (file.size_bytes / 1024) | round(1) }} KB &middot;
+                    {{ file.modified[:16] }}
+                </div>
+            </div>
+            <div class="file-actions">
+                <a href="{{ url_for('result', filename=file.filename) }}" class="btn btn-secondary">View</a>
+                <a href="{{ url_for('download', filename=file.filename) }}" class="btn btn-primary">Download</a>
+                <form action="{{ url_for('delete', filename=file.filename) }}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this file?');">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p style="color: var(--text-muted); text-align: center; padding: 2rem;">
+        No output files yet. <a href="{{ url_for('index') }}">Parse a document</a> to get started.
+    </p>
+    {% endif %}
+</div>
+{% endblock %}
