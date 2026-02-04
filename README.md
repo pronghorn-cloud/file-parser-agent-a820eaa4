@@ -153,7 +153,42 @@ file-parser-agent/
 ## Supported Formats
 
 | Input Format | Extensions | Output Formats |
-|-------------|------------|----------------|
+## Deployment
+
+### Render.com (Recommended)
+
+This application is configured for easy deployment on [Render.com](https://render.com).
+
+#### One-Click Deploy
+
+1. Fork this repository to your GitHub account
+2. Create a new account on [Render.com](https://render.com) (free tier available)
+3. Click "New +" → "Blueprint"
+4. Connect your GitHub account and select this repository
+5. Render will automatically detect the `render.yaml` configuration
+6. Set the `ANTHROPIC_API_KEY` environment variable in the Render dashboard (optional, for AI vision features)
+7. Click "Apply" to deploy
+
+#### Manual Deploy
+
+1. Create a new "Web Service" on Render
+2. Connect your repository
+3. Configure the following settings:
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn src.web.app:app --bind 0.0.0.0:$PORT`
+4. Add environment variables:
+   - `RENDER=true` (enables cloud-optimized settings)
+   - `SECRET_KEY` (generate a secure random string)
+   - `ANTHROPIC_API_KEY` (optional, for AI features)
+
+#### Important Notes for Cloud Deployment
+
+- **Ephemeral Filesystem**: On Render.com, uploaded files and outputs are stored in `/tmp` and will be cleared on each deploy or restart. For persistent storage, consider integrating with cloud storage (S3, GCS, etc.)
+- **Free Tier**: The free tier may have cold starts (app sleeps after inactivity)
+- **Environment Variables**: Never commit API keys; always use environment variables
+
+
 | PDF | .pdf | JSON, Markdown, TXT |
 | Word | .docx, .doc | JSON, Markdown, TXT |
 | Excel | .xlsx, .xls | JSON, Markdown, CSV |
